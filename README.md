@@ -20,5 +20,5 @@ A lyric player made using python and Kivy GUI
 6. Thats it . Now enjoy the lyric player
 
 
-## Feel free to contribute if you wanna . Till then happy coding.
+##### Feel free to contribute if you wanna . Till then happy coding.
 
