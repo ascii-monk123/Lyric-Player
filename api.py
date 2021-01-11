@@ -15,11 +15,9 @@ class SongFetcher:
     def fetchFromUrl(cls,path,type,**urlParams):
         url=ul.urlencode(urlParams)
         try:
-            print('Fetching of info has started')
             with request.urlopen("{}{}?{}".format(reqApiData.get('trackUrl'),path,url)) as f:
                 urldata=f.read().decode("utf-8")
             urldata=json.loads(urldata)
-            print('Data has been fetched from the server')
             if type == 'songId':
                 if(urldata['message']['body']['track_list']):
                     songId=urldata['message']['body']['track_list'][0]['track']['track_id']
@@ -31,7 +29,7 @@ class SongFetcher:
                     print('Sorry the data couldnt be found')
         except (err.URLError,KeyError,ValueError) as error:
             print("Error happened {}".format(error))
-        return url
+        return False
     #### this method is mainly responsible for fetching the song id 
     def getSongID(self)->str or bool:
         songDetails=self.fetchFromUrl('/track.search','songId',**{'q_artist':self.artist,'page_size':1,'page':1,'s_track_rating':'desc','format':'json','q_track':self.songName,'apikey':reqApiData.get('key')})
